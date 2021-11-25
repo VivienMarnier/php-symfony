@@ -21,4 +21,8 @@ https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
  
  Then docker-compose up -d
  
+ ## Thirdly install the project dependencies
  
+ Run docker-compose run php8-service composer install
+ 
+ Run docker-compose run node-service npm install
