@@ -32,6 +32,7 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
+    // enables Sass/SCSS support
     .enableSassLoader()
 
     /*
@@ -56,9 +57,6 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
-
-    // enables Sass/SCSS support
-    //.enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
