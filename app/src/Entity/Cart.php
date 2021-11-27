@@ -11,7 +11,7 @@ class Cart {
      */
     private $products = [];
 
-    public function addProduct(Product $product, $qty) {
+    public function addProduct(Product $product, int $qty) {
         $this->products[$product->getId()] = [
             'entity' => $product,
             'qty' => $qty
@@ -27,7 +27,8 @@ class Cart {
     public function getTotal() {
         $total = 0;
         foreach($this->products as $key => $product) {
-            $total += $product['qty'] * $product['entity']->getPrice();
+            $step = $product['qty'] * $product['entity']->getPrice();
+            $total += $step;
         }
         return $total;
     }
