@@ -26,3 +26,15 @@ https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
  Run docker-compose run php8-service composer install
  
  Run docker-compose run node-service npm install
+ 
+ ## Fifth setup database
+ 
+ Run docker-compose run php8-service php bin/console doctrine:migrations:migrate
+ Run docker-compose run php8-service php bin/console doctrine:fixtures:load
+ 
+ ## Navigate !
+ 
+ You can now access to the site from http://localhost:8080/ 
+ 
+ Admin : http://localhost:8080/admin
+ 
