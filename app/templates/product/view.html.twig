@@ -3,16 +3,32 @@
 {% block title %} {{ product.name }} {% endblock %}
 
 {% block body %}
-    <div class="col-lg-12 col-xxl-12">
-        <div class="card bg-light border-0 h-100">
-            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-collection"></i></div>
-                <h2 class="fs-4 fw-bold">{{ product.name }}</h2>
-                <p class="mb-0">{{ product.description }}</p>
-            </div>
-            <div class="card-footer text-center">
-                
+    <div class="col-lg-12 bg-light">
+        <div class="row text-center p-5">
+            <h2 class="fs-4 fw-bold">{{ product.name }}</h2>
+            <p class="mb-0">{{ product.description }}</p>
+        </div>
+        <hr/>
+        <div class="row text-center">
+            <h3>Add to cart</3>
+            <div class="d-flex justify-content-center p-5">
+                {{ form_start(form,{'attr': {'class': 'row row-cols-lg-auto g-3 align-items-center'}}) }}
+                <div class="col-12">
+                    <div class="input-group mb-3">
+                        {{ form_label(form.product_qty, 'Quantity', {'label_attr': {'class': 'input-group-text'}}) }}
+                        {{ form_widget(form.product_qty,{'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-12" style="margin-top: unset;">
+                    {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                {{ form_end(form) }}
             </div>
         </div>
+          <hr/>
+        <div class="d-flex justify-content-end p-5">
+            <a href="{{ url('index') }}" class="btn btn-dark btn-lg">Back to products list</a>
+        </div>
     </div>
+
 {% endblock %}

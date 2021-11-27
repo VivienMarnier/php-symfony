@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My cart{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12 bg-light">
+        <div class="row text-center p-5">
+            <h2>My cart</h2>
+        </div>
+        <div class="row p-5">
+            {% if cart.products  %}
+                <table class="table caption-top">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Unit price</th>
+                            <th scope="col">Sub total</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in cart.products %}
+                            <tr>
+                                <th scope="row">{{ product.entity.name }}</th>
+                                <th>{{ product.qty }}</th>
+                                <th>{{ product.entity.price }}{{ 'EUR'|currency_symbol }}</th>
+                                <th>{{ product.entity.price * product.qty }}{{ 'EUR'|currency_symbol }}</th>
+                                <th>
+                                    <a href="{{ url('remove_product_cart',{id:product.entity.id})}}" class="btn btn-danger">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
+                                        <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z"/>
+                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                        </svg>
+                                    </a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="text-end p-4 fw-bold">
+                    Total : {{ total }}{{ 'EUR'|currency_symbol }}
+                </div>
+                <div>
+                    <a href="{{ url('clear_cart')}}" class="btn btn-dark">Clear cart</a>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-center">
+                    Your cart is empty, go visit our <a href="{{ url('index') }}"> products page </a> to start your shopping !
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
