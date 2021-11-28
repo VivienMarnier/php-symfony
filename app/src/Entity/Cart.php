@@ -26,7 +26,6 @@ class Cart {
             'entity' => $product,
             'qty' => $qty
         ];
-        dump($this->products);
     }
   
     /**
