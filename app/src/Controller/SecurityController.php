@@ -9,9 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/login", name="login")
-     */
+    #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -60,5 +58,12 @@ class SecurityController extends AbstractController
             // the label displayed for the remember me checkbox (the |trans filter is applied to it)
             'remember_me_label' => 'Remember me',
         ]);
+    }
+
+    #[Route('/logout', name: 'app_logout',methods:"GET")]
+    public function logout(): void
+    {
+        // controller can be blank: it will never be called!
+        throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(CartService $cartService): Response
+    public function index(): Response
     {
         $productRepository = $this->getDoctrine()->getRepository(Product::class);
         $products = $productRepository->getProductsOrderByName();
