@@ -16,6 +16,7 @@ class Cart {
             'entity' => $product,
             'qty' => $qty
         ];
+        dump($this->products);
     }
 
     public function removeProduct(int $productId) {

@@ -6,8 +6,10 @@ use App\Entity\Cart;
 use App\Entity\Product;
 use DomainException;
 use Exception;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class CartService
 {
@@ -21,8 +23,18 @@ class CartService
      */
     protected $cart;
 
-    public function __construct(RequestStack $requestStack) {
-        $this->session = $requestStack->getSession();
+    public function __construct(RequestStack $requestStack,KernelInterface $kernel) {
+        $this->init($requestStack, $kernel);
+    }
+
+    private function init(RequestStack $requestStack,$kernel) {
+        try {
+            $this->session = $requestStack->getSession();
+        }
+        catch(SessionNotFoundException $e) {
+            // Get session from kernel if no request stack available
+            $this->session = $kernel->getContainer()->get('session'); 
+        }
     }
 
     /**
@@ -36,7 +48,7 @@ class CartService
      * Retrieves the total amount of the cart
      */
     public function getTotalCartAmount() {
-        $cart = $this->session->get('cart');
+        $cart = $this->session->get('cart',new Cart());
         return $cart->getTotal();
     }
 
@@ -44,8 +56,8 @@ class CartService
      * Retrieves the total number of items in the cart 
      */
     public function getCartItemsCount() {
-        $cart = $this->session->get('cart');
-        return $cart->getCartItemsCount();
+        $cart = $this->session->get('cart',new Cart());
+        return $cart->getItemsCount();
     }
 
     /**
