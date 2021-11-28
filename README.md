@@ -13,29 +13,37 @@ https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
  
  ## First clone project repository 
  
- Run git clone https://github.com/VivienMarnier/php-symfony.git from your target repository
+ Run `git clone https://github.com/VivienMarnier/php-symfony.git` from your target repository
  
  ## Secondly build and mount docker container and images
  
- From project repository, run docker-compose build
+ From project repository: 
  
- Then docker-compose up -d
+ run `docker-compose build`
+ 
+ Then `docker-compose up -d`
  
  ## Thirdly install the project dependencies
  
- Run docker-compose run php8-service composer install
+ Run `docker-compose run php8-service composer install`
  
- Run docker-compose run node-service npm install
+ Run `docker-compose run node-service npm install`
  
  ## Fourth setup database
  
- Run docker-compose run php8-service php bin/console doctrine:migrations:migrate
+ To create database :
  
- Run docker-compose run php8-service php bin/console doctrine:fixtures:load
+ Run `docker exec -it php8-container bash`
+ 
+ Then `sqlite3 app.db`
+ 
+ For playing migrations run `docker-compose run php8-service php bin/console doctrine:migrations:migrate`
+ 
+ For playing fixtures run `docker-compose run php8-service php bin/console doctrine:fixtures:load`
  
  ## Fifth build assets
  
- Run docker-compose run --rm node-service npm run dev
+ Run `docker-compose run --rm node-service npm run dev`
  
  ## Navigate !
  
@@ -45,7 +53,7 @@ https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
  
  ## More : unit and functionnal tests
  
- For unit test run : docker-compose run php8-service ./vendor/bin/phpunit
+ For unit test run : `docker-compose run php8-service ./vendor/bin/phpunit`
  
  
  
