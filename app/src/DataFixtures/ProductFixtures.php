@@ -10,31 +10,34 @@ class ProductFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $names = [
-            'Curabitur',
-            'Porttitor',
-            'Bibendum',
-            'Sodales',
-            'Facilisis',
-            'Eget',
-            'Pharetra',
-            'Scelerisque',
-            'Etiam',
-            'Mollis',
-            'Praesent vel',
-            'Finibus'
+        $products = [
+            'Curabitur' => 'bananas.png',
+            'Porttitor' => 'camcorder.png',
+            'Bibendum' => 'camera.png',
+            'Sodales' => 'car.jpg',
+            'Facilisis' => 'checklist.png',
+            'Eget' => 'cheese.png',
+            'Pharetra' => 'cherries.png',
+            'Scelerisque' => 'clapperboard.png',
+            'Etiam' => 'compact-cassette.png',
+            'Mollis' => 'hamburger.png',
+            'Praesent vel' => 'monitor.png',
+            'Finibus' => 'vhs.png'
         ];
 
-        for($i = 0; $i < 12; $i++) {
+        foreach($products as $name => $image) {
             $product = new Product();
             // Name
-            $product->setName($names[$i]);
+            $product->setName($name);
             // Description
             $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida pulvinar enim, eget sagittis tortor cursus mollis. Fusce sed tortor ante. Mauris vitae velit in mi ultrices pretium. Proin convallis.";
             $product->setDescription($description);
             // Price
             $price = mt_rand(1250,5370) / 100;
             $product->setPrice($price);
+
+            // Image
+            $product->setImage($image);
 
             $manager->persist($product);
         }

@@ -22,11 +22,25 @@ class CartService
      * @var Cart
      */
     protected $cart;
-
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $requestStack
+     * @param  mixed $kernel
+     * @return void
+     */
     public function __construct(RequestStack $requestStack,KernelInterface $kernel) {
         $this->init($requestStack, $kernel);
     }
-
+    
+    /**
+     * init
+     *
+     * @param  mixed $requestStack
+     * @param  mixed $kernel
+     * @return void
+     */
     private function init(RequestStack $requestStack,$kernel) {
         try {
             $this->session = $requestStack->getSession();
@@ -36,48 +50,65 @@ class CartService
             $this->session = $kernel->getContainer()->get('session'); 
         }
     }
-
+   
     /**
      * Retrieves the cart from session
+     *
+     * @return Cart
      */
-    public function getCart() {
+    public function getCart(): Cart {
         return $this->session->get('cart', new Cart());
     }
-
+  
     /**
-     * Retrieves the total amount of the cart
+     * getTotalCartAmount
+     *
+     * @return float
      */
-    public function getTotalCartAmount() {
+    public function getTotalCartAmount(): float {
         $cart = $this->session->get('cart',new Cart());
         return $cart->getTotal();
     }
 
     /**
      * Retrieves the total number of items in the cart 
+     * @return int
      */
-    public function getCartItemsCount() {
+    public function getCartItemsCount(): int {
         $cart = $this->session->get('cart',new Cart());
         return $cart->getItemsCount();
     }
-
+  
     /**
-     * Add product or update product quantity from cart 
+     * Add product or update product quantity from cart
+     *
+     * @param  mixed $product
+     * @param  mixed $qty
+     * @return void
      */
     public function addProduct(Product $product, int $qty) {
         $cart = $this->session->get('cart', new Cart());
         $cart->addProduct($product, $qty);
         $this->session->set('cart', $cart);
     }
-
+    
     /**
      * Remove product from cart
+     *
+     * @param  mixed $productId
+     * @return void
      */
     public function removeProduct(int $productId) {
         $cart = $this->session->get('cart');
         $cart->removeProduct($productId);
         $this->session->set('cart', $cart);
     }
-
+    
+    /**
+     * clearCart
+     *
+     * @return void
+     */
     public function clearCart() {
         $cart = $this->session->get('cart');
         $cart->clear();
