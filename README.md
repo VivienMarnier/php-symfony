@@ -27,13 +27,13 @@ https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
  
  Run docker-compose run node-service npm install
  
- ## Fifth setup database
+ ## Fourth setup database
  
  Run docker-compose run php8-service php bin/console doctrine:migrations:migrate
  
  Run docker-compose run php8-service php bin/console doctrine:fixtures:load
  
- ## Sixth build assets
+ ## Fifth build assets
  
  Run docker-compose run --rm node-service npm run dev
  
