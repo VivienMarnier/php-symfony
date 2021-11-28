@@ -30,20 +30,6 @@ class CartController extends AbstractController
         ]);
     }
 
-/*     #[Route('/cart/add/product/{id}', name: 'cart_add')]
-    public function addProduct(Request $request): Response {
-        $form = $this->createForm(ProductCartType::class);
-        
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $datas = $form->getData();
-            $this->cartService->addProduct($product,$datas['product_qty']);
-            $this->addFlash('sucess','Product has been succesfully added to cart !');
-            return $this->redirectToRoute('index');
-        }
-    } */
-
-
     #[Route('/cart/remove/product/{id}', name: 'remove_product_cart')]
     public function removeProduct(int $id) {
         $this->cartService->removeProduct($id);
